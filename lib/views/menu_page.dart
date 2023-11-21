@@ -26,7 +26,7 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   Future<void> _loadMenuData() async {
-    final apiData = await MockApiService.getMockUsers();  
+    final apiData = await MockApiService.getMockProducts();
     setState(() {
       foodMenu = apiData.map((jsonFood) => Food.fromJson(jsonFood)).toList();
     });

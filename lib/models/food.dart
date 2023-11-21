@@ -10,7 +10,7 @@ class Food {
     required this.price,
     required this.imagePath,
     required this.rating,
-    required this.description, 
+    required this.description,
   });
 
   factory Food.fromJson(Map<String, dynamic> json) {
@@ -19,8 +19,18 @@ class Food {
       price: json['price'],
       imagePath: json['imagePath'],
       rating: json['rating'],
-      description:
-          json['description'], 
+      description: json['description'],
     );
+  }
+}
+
+class ProductList {
+  List<Food> products;
+
+  ProductList({required this.products});
+
+  factory ProductList.fromJsonList(List<dynamic> list) {
+    List<Food> products = list.map((item) => Food.fromJson(item)).toList();
+    return ProductList(products: products);
   }
 }

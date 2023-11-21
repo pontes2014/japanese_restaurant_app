@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:japanese_restaurant_app/components/custom_button.dart';
+import 'package:japanese_restaurant_app/theme/colors.dart';
 
 import '../models/food.dart';
 
@@ -13,6 +15,28 @@ class FoodDetailsPage extends StatefulWidget {
 }
 
 class _FoodDetailsPageState extends State<FoodDetailsPage> {
+  // quantity
+  int quantityCount = 0;
+
+  // decrement quantity
+  void decrementQuantity() {
+    setState(() {
+      if (quantityCount > 0) {
+        quantityCount--;
+      }
+    });
+  }
+
+  // increment quantity
+  void incrementQuantity() {
+    setState(() {
+      quantityCount++;
+    });
+  }
+
+  // add to cart
+  void addToCart() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,15 +91,85 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
               ),
 
               // description
-              const Text("Description"),
+              Text(
+                "Description:",
+                style: TextStyle(
+                    color: Colors.grey[900],
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
               const SizedBox(
                 height: 10,
               ),
-              Text(widget.food.description),
+              Text(widget.food.description,
+                  style: TextStyle(
+                      color: Colors.grey[600], height: 2, fontSize: 14)),
             ]),
           )),
 
           // price + quantity + add to cart button
+          Container(
+            color: primaryColor,
+            child: Padding(
+              padding: const EdgeInsets.all(25),
+              child: Column(children: [
+                // price + quantity
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // price
+                    Text(
+                      "\$" + widget.food.price,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                    // quantity
+                    Row(
+                      children: [
+                        // minus button
+                        Container(
+                          child: IconButton(
+                              onPressed: decrementQuantity,
+                              icon: const Icon(
+                                Icons.remove,
+                                color: Colors.white,
+                              )),
+                        ),
+                        // quantity count
+                        SizedBox(
+                          width: 20,
+                          child: Center(
+                            child: Text(
+                              quantityCount.toString(),
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        // plus button
+                        Container(
+                          child: IconButton(
+                              onPressed: incrementQuantity,
+                              icon: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              )),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                const SizedBox(height: 20),
+
+                //add to cart
+                CustomButton(text: "Add to cart", onTap: addToCart)
+              ]),
+            ),
+          )
         ],
       ),
     );
