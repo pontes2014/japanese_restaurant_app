@@ -49,12 +49,25 @@ class _MenuPageState extends State<MenuPage> {
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        centerTitle: true,
         elevation: 0,
         leading: Icon(
           Icons.menu,
           color: Colors.grey[900],
         ),
         title: Text('Tokyo', style: TextStyle(color: Colors.grey[900])),
+        actions: [
+          // cart button
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/cart_page');
+            },
+            icon: const Icon(
+              Icons.shopping_cart,
+              color: Colors.black,
+            ),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -74,7 +87,10 @@ class _MenuPageState extends State<MenuPage> {
                         //promo message
                         Text(
                           'Get 32% Promo',
-                          style: GoogleFonts.dmSerifDisplay(),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14),
                         ),
                         const SizedBox(height: 10),
                         // reddem button

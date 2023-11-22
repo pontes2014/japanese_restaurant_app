@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:japanese_restaurant_app/models/shop.dart';
+import 'package:japanese_restaurant_app/views/cart_page.dart';
 import 'package:japanese_restaurant_app/views/intro_page.dart';
 import 'package:japanese_restaurant_app/views/menu_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => Shop(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,6 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/intro_page': (context) => const IntroPage(),
         '/menu_page': (context) => const MenuPage(),
+        '/cart_page': (context) => const CartPage(),
       },
     );
   }

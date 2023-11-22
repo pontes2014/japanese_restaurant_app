@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:japanese_restaurant_app/components/custom_button.dart';
+import 'package:japanese_restaurant_app/models/shop.dart';
 import 'package:japanese_restaurant_app/theme/colors.dart';
+import 'package:provider/provider.dart';
 
 import '../models/food.dart';
 
@@ -35,7 +37,42 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
   }
 
   // add to cart
-  void addToCart() {}
+  void addToCart() {
+    // only add to cart if there is something in the cart
+    if (quantityCount > 0) {
+      // get access to shop
+      final shop = context.read<Shop>();
+
+      // add to cart
+      shop.addToCart(widget.food, quantityCount);
+
+      // let the user know it was  sucessful
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => AlertDialog(
+                  backgroundColor: primaryColor,
+                  content: const Text(
+                    "successfully added to cart",
+                    style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
+                  actions: [
+                    // okay button
+                    IconButton(
+                        onPressed: () {
+                          // pop once to remove dialog box
+                          Navigator.pop(context);
+                          // pop again to go previous screen
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.done,
+                          color: Colors.white,
+                        ))
+                  ]));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
