@@ -25,12 +25,32 @@ class Food {
 }
 
 class ProductList {
-  List<Food> products;
+  List<Food> foodList;
+  List<Food> drinksList;
+  List<Food> dessertList;
 
-  ProductList({required this.products});
+  ProductList({
+    required this.foodList,
+    required this.drinksList,
+    required this.dessertList,
+  });
 
-  factory ProductList.fromJsonList(List<dynamic> list) {
-    List<Food> products = list.map((item) => Food.fromJson(item)).toList();
-    return ProductList(products: products);
+  factory ProductList.fromJson(Map<String, dynamic> json) {
+    List<dynamic> foodJsonList = json['produtos']['food'];
+    List<dynamic> drinksJsonList = json['produtos']['drinks'];
+    List<dynamic> dessertJsonList = json['produtos']['dessert'];
+
+    List<Food> foodList =
+        foodJsonList.map((item) => Food.fromJson(item)).toList();
+    List<Food> drinksList =
+        drinksJsonList.map((item) => Food.fromJson(item)).toList();
+    List<Food> dessertList =
+        dessertJsonList.map((item) => Food.fromJson(item)).toList();
+
+    return ProductList(
+      foodList: foodList,
+      drinksList: drinksList,
+      dessertList: dessertList,
+    );
   }
 }

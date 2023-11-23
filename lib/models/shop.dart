@@ -4,7 +4,7 @@ import 'dart:convert';
 
 class Shop extends ChangeNotifier {
   List<Food> _foodMenu = [];
-  List<Food> _cart = [];
+  final List<Food> _cart = [];
 
   List<Food> get foodMenu => _foodMenu;
   List<Food> get cart => _cart;

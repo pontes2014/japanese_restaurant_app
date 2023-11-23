@@ -25,7 +25,7 @@ class IntroPage extends StatelessWidget {
 
               // icon
               Image.asset(
-                'assets/images/sushiman.png',
+                'assets/images/image_intro_page.png',
               ),
               const SizedBox(
                 height: 25,

@@ -10,17 +10,15 @@ import '../models/food.dart';
 class FoodDetailsPage extends StatefulWidget {
   final Food food;
 
-  const FoodDetailsPage({super.key, required this.food});
+  const FoodDetailsPage({Key? key, required this.food}) : super(key: key);
 
   @override
   State<FoodDetailsPage> createState() => _FoodDetailsPageState();
 }
 
 class _FoodDetailsPageState extends State<FoodDetailsPage> {
-  // quantity
   int quantityCount = 0;
 
-  // decrement quantity
   void decrementQuantity() {
     setState(() {
       if (quantityCount > 0) {
@@ -29,53 +27,48 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
     });
   }
 
-  // increment quantity
   void incrementQuantity() {
     setState(() {
       quantityCount++;
     });
   }
 
-  // add to cart
   void addToCart() {
-    // only add to cart if there is something in the cart
     if (quantityCount > 0) {
-      // get access to shop
       final shop = context.read<Shop>();
-
-      // add to cart
       shop.addToCart(widget.food, quantityCount);
 
-      // let the user know it was  sucessful
       showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (context) => AlertDialog(
-                  backgroundColor: primaryColor,
-                  content: const Text(
-                    "successfully added to cart",
-                    style: TextStyle(color: Colors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                  actions: [
-                    // okay button
-                    IconButton(
-                        onPressed: () {
-                          // pop once to remove dialog box
-                          Navigator.pop(context);
-                          // pop again to go previous screen
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(
-                          Icons.done,
-                          color: Colors.white,
-                        ))
-                  ]));
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+          backgroundColor: primaryColor,
+          content: const Text(
+            "Successfully added to cart",
+            style: TextStyle(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.done,
+                color: Colors.white,
+              ),
+            )
+          ],
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    Food food = widget.food;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -84,127 +77,109 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
       ),
       body: Column(
         children: [
-          // listview of food details
           Expanded(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: ListView(children: [
-              // image
-              Image.asset(
-                widget.food.imagePath,
-                height: 200,
-              ),
-
-              // rating
-              Row(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: ListView(
                 children: [
-                  // star icon
-                  Icon(Icons.star, color: Colors.yellow[800], size: 20),
-
-                  const SizedBox(
-                    width: 10,
+                  Image.asset(
+                    food.imagePath,
+                    height: 200,
                   ),
-
-                  // rating number
+                  Row(
+                    children: [
+                      Icon(Icons.star, color: Colors.yellow[800], size: 20),
+                      const SizedBox(width: 10),
+                      Text(
+                        food.rating,
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 10),
                   Text(
-                    widget.food.rating,
+                    food.name,
+                    style: GoogleFonts.dmSerifDisplay(fontSize: 28),
+                  ),
+                  const SizedBox(height: 25),
+                  Text(
+                    "Description:",
                     style: TextStyle(
-                        color: Colors.grey[600], fontWeight: FontWeight.bold),
-                  )
+                      color: Colors.grey[900],
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    food.description,
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      height: 2,
+                      fontSize: 14,
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
-
-              // food name
-              Text(
-                widget.food.name,
-                style: GoogleFonts.dmSerifDisplay(fontSize: 28),
-              ),
-
-              const SizedBox(
-                height: 25,
-              ),
-
-              // description
-              Text(
-                "Description:",
-                style: TextStyle(
-                    color: Colors.grey[900],
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(widget.food.description,
-                  style: TextStyle(
-                      color: Colors.grey[600], height: 2, fontSize: 14)),
-            ]),
-          )),
-
-          // price + quantity + add to cart button
+            ),
+          ),
           Container(
             color: primaryColor,
             child: Padding(
               padding: const EdgeInsets.all(25),
-              child: Column(children: [
-                // price + quantity
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // price
-                    Text(
-                      "\$" + widget.food.price,
-                      style: const TextStyle(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "\$${food.price}",
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    ),
-                    // quantity
-                    Row(
-                      children: [
-                        // minus button
-                        Container(
-                          child: IconButton(
-                              onPressed: decrementQuantity,
-                              icon: const Icon(
-                                Icons.remove,
-                                color: Colors.white,
-                              )),
+                          fontSize: 18,
                         ),
-                        // quantity count
-                        SizedBox(
-                          width: 20,
-                          child: Center(
-                            child: Text(
-                              quantityCount.toString(),
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold),
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: decrementQuantity,
+                            icon: const Icon(
+                              Icons.remove,
+                              color: Colors.white,
                             ),
                           ),
-                        ),
-                        // plus button
-                        Container(
-                          child: IconButton(
-                              onPressed: incrementQuantity,
-                              icon: const Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              )),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                const SizedBox(height: 20),
-
-                //add to cart
-                CustomButton(text: "Add to cart", onTap: addToCart)
-              ]),
+                          SizedBox(
+                            width: 20,
+                            child: Center(
+                              child: Text(
+                                quantityCount.toString(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: incrementQuantity,
+                            icon: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  CustomButton(text: "Add to cart", onTap: addToCart),
+                ],
+              ),
             ),
           )
         ],

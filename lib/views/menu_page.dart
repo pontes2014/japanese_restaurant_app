@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:japanese_restaurant_app/components/custom_button.dart';
+import 'package:japanese_restaurant_app/components/custom_drawer.dart';
 import 'package:japanese_restaurant_app/components/custom_foodtile.dart';
 import 'package:japanese_restaurant_app/models/food.dart';
 import 'package:japanese_restaurant_app/services/api_services.dart';
@@ -17,6 +18,8 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage> {
   // food menu
   late List<Food> foodMenu = [];
+  late List<Food> drinksMenu = [];
+  late List<Food> dessertMenu = [];
 
   @override
   void initState() {
@@ -27,17 +30,28 @@ class _MenuPageState extends State<MenuPage> {
 
   Future<void> _loadMenuData() async {
     final apiData = await MockApiService.getMockProducts();
+    final List<Map<String, dynamic>> foodList =
+        List.from(apiData['produtos']['food']);
+    final List<Map<String, dynamic>> drinksList =
+        List.from(apiData['produtos']['drinks']);
+    final List<Map<String, dynamic>> dessertList =
+        List.from(apiData['produtos']['dessert']);
+
     setState(() {
-      foodMenu = apiData.map((jsonFood) => Food.fromJson(jsonFood)).toList();
+      foodMenu = foodList.map((jsonFood) => Food.fromJson(jsonFood)).toList();
+      drinksMenu =
+          drinksList.map((jsonDrink) => Food.fromJson(jsonDrink)).toList();
+      dessertMenu =
+          dessertList.map((jsonDesert) => Food.fromJson(jsonDesert)).toList();
     });
   }
 
-  void navigateToItemDetails(int index) {
+  void navigateToItemDetails(List<Food> menu, int index) {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => FoodDetailsPage(
-          food: foodMenu[index],
+          food: menu[index],
         ),
       ),
     );
@@ -51,24 +65,9 @@ class _MenuPageState extends State<MenuPage> {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         elevation: 0,
-        leading: Icon(
-          Icons.menu,
-          color: Colors.grey[900],
-        ),
         title: Text('Tokyo', style: TextStyle(color: Colors.grey[900])),
-        actions: [
-          // cart button
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/cart_page');
-            },
-            icon: const Icon(
-              Icons.shopping_cart,
-              color: Colors.black,
-            ),
-          )
-        ],
       ),
+      drawer: const CustomDrawer(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +84,7 @@ class _MenuPageState extends State<MenuPage> {
                     Column(
                       children: [
                         //promo message
-                        Text(
+                        const Text(
                           'Get 32% Promo',
                           style: TextStyle(
                               color: Colors.white,
@@ -148,13 +147,78 @@ class _MenuPageState extends State<MenuPage> {
             Padding(
               padding: const EdgeInsets.only(left: 5),
               child: SizedBox(
-                height: 300,
+                height: 250,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: foodMenu.length,
                   itemBuilder: (context, index) => FoodTile(
                     food: foodMenu[index],
-                    onTap: () => navigateToItemDetails(index),
+                    onTap: () => navigateToItemDetails(foodMenu, index),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+
+            //menu list
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Text(
+                "Drinks Menu",
+                style: TextStyle(
+                    color: Colors.grey[800],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: SizedBox(
+                height: 250,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: drinksMenu.length,
+                  itemBuilder: (context, index) => FoodTile(
+                    food: drinksMenu[index],
+                    onTap: () => navigateToItemDetails(drinksMenu, index),
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(
+              height: 25,
+            ),
+
+            //menu list
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Text(
+                "Dessert Menu",
+                style: TextStyle(
+                    color: Colors.grey[800],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: SizedBox(
+                height: 250,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: dessertMenu.length,
+                  itemBuilder: (context, index) => FoodTile(
+                    food: dessertMenu[index],
+                    onTap: () => navigateToItemDetails(dessertMenu, index),
                   ),
                 ),
               ),
