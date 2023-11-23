@@ -3,6 +3,7 @@ import 'package:japanese_restaurant_app/models/shop.dart';
 import 'package:japanese_restaurant_app/views/cart_page.dart';
 import 'package:japanese_restaurant_app/views/intro_page.dart';
 import 'package:japanese_restaurant_app/views/menu_page.dart';
+import 'package:japanese_restaurant_app/views/delivery_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/intro_page': (context) => const IntroPage(),
         '/menu_page': (context) => const MenuPage(),
         '/cart_page': (context) => const CartPage(),
+        '/delivery_page': (context) => const DeliveryPage(),
       },
     );
   }

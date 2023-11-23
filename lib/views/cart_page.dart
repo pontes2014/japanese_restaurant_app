@@ -72,7 +72,39 @@ class CartPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(25),
-              child: CustomButton(text: "Pay Now,", onTap: () {}),
+              child: CustomButton(
+                text: "Delivery and payment",
+                onTap: () {
+                  if (value.cart.isNotEmpty) {
+                    Navigator.pushNamed(context, '/delivery_page');
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Empty cart",
+                              style: TextStyle(color: Colors.white)),
+                          backgroundColor: primaryColor,
+                          content: const Text(
+                              "Add items to cart before proceeding to delivery and payment.",
+                              style: TextStyle(color: Colors.white)),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text(
+                                "OK",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
             )
           ],
         ),
