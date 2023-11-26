@@ -49,7 +49,7 @@ class IntroPage extends StatelessWidget {
               const SizedBox(
                 height: 25,
               ),
-              CustomButton(
+              CustomButton(icon: Icons.arrow_forward_rounded,
                   text: 'Get Started',
                   onTap: () {
                     // go to menu page

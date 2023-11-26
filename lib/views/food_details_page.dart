@@ -42,6 +42,9 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
         context: context,
         barrierDismissible: false,
         builder: (context) => AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
           backgroundColor: primaryColor,
           content: const Text(
             "Successfully added to cart",
@@ -153,7 +156,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                             ),
                           ),
                           SizedBox(
-                            width: 20,
+                            width: 40,
                             child: Center(
                               child: Text(
                                 quantityCount.toString(),
@@ -177,7 +180,10 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  CustomButton(text: "Add to cart", onTap: addToCart),
+                  CustomButton(
+                      icon: Icons.shopping_cart,
+                      text: "Add to cart",
+                      onTap: addToCart),
                 ],
               ),
             ),
