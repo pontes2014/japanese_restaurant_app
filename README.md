@@ -1,5 +1,5 @@
 # japanese_restaurant_app
- Neste projeto, estou utilizando as bibliotecas Flutter_credit_card, Geolocator e Provider.
+ Neste projeto estou utilizando um mockAPI e as bibliotecas Flutter_credit_card, Geolocator e Provider.
 
 O layout em questão foi inspirado por este design encontrado no Dribbble: Sushiman Food App.
 
