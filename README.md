@@ -1,8 +1,13 @@
 # japanese_restaurant_app
- projeto pessoal 
+ Neste projeto, estou utilizando as bibliotecas Flutter_credit_card, Geolocator e Provider.
 
- <img src="https://github.com/pontes2014/japanese_restaurant_app/assets/91500779/b51f32a9-1354-492e-9b10-4fd8d5c54648" width="300">
- <img src="https://github.com/pontes2014/japanese_restaurant_app/assets/91500779/dd317a6f-5826-4f2d-9d77-2fc69c52f9cb" width="300">
- <img src="https://github.com/pontes2014/japanese_restaurant_app/assets/91500779/2f2b7177-5368-4c83-a598-34ccd3efd8a9" width="300">
- <img src="https://github.com/pontes2014/japanese_restaurant_app/assets/91500779/a82608a4-f6a6-4959-b23a-77e3bddefa62" width="300">
- <img src="https://github.com/pontes2014/japanese_restaurant_app/assets/91500779/e3180da5-3e24-447b-80b5-0ff46de81a16" width="300">
+O layout em questão foi inspirado por este design encontrado no Dribbble: Sushiman Food App.
+
+ <img src="https://github.com/pontes2014/japanese_restaurant_app/assets/91500779/b6776bd9-891c-48a9-912d-7413402936b6" width="300">
+ <img src="https://github.com/pontes2014/japanese_restaurant_app/assets/91500779/b4eb2d89-d041-4756-9281-c1de4ddd25e2" width="300">
+ <img src="https://github.com/pontes2014/japanese_restaurant_app/assets/91500779/ee844f18-5f59-4886-b0c1-26fb6d7fb993" width="300">
+ <img src="https://github.com/pontes2014/japanese_restaurant_app/assets/91500779/24f90101-b555-4ba3-a366-abb449329d41" width="300">
+ <img src="https://github.com/pontes2014/japanese_restaurant_app/assets/91500779/16adf03e-6365-461a-bf57-ce6572942149" width="300">
+ <img src="https://github.com/pontes2014/japanese_restaurant_app/assets/91500779/ea2a0314-02d7-4bb7-b55c-24424275d8c4" width="300">
+ <img src="https://github.com/pontes2014/japanese_restaurant_app/assets/91500779/98dd1887-4d9b-4851-9257-673cfbdbd73a" width="300">
+ <img src="https://github.com/pontes2014/japanese_restaurant_app/assets/91500779/d42646d8-4c8c-400a-ad25-98bba70236a2" width="300">
