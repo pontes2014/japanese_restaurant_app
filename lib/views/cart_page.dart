@@ -46,6 +46,7 @@ class CartPage extends StatelessWidget {
                   final Food food = value.cart[index];
                   final String foodName = food.name;
                   final String foodPrice = food.price;
+                  final String foodImagePath = food.imagePath;
 
                   return Container(
                     decoration: BoxDecoration(
@@ -54,6 +55,20 @@ class CartPage extends StatelessWidget {
                     ),
                     margin: const EdgeInsets.only(left: 20, top: 20, right: 20),
                     child: ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset(
+                            foodImagePath,
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
                       title: Text(
                         foodName,
                         style: const TextStyle(

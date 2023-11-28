@@ -63,32 +63,40 @@ class _DeliveryPageState extends State<DeliveryPage> {
                         children: [
                           const Icon(Icons.location_on,
                               color: Colors.white, size: 40),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Rua: ${locationController.road}',
-                                style: const TextStyle(
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width - 80,
+                                  child: Text(
+                                    'Rua: ${locationController.road}',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
+                                    softWrap: true,
+                                  ),
+                                ),
+                                Text(
+                                  'Cidade: ${locationController.cityDistrict}',
+                                  style: const TextStyle(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
-                              ),
-                              Text(
-                                'Bairro/Cidade: ${locationController.cityDistrict}',
-                                style: const TextStyle(
-                                  color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'CEP: ${locationController.postcode}',
-                                style: const TextStyle(
-                                  color: Colors.white,
+                                Text(
+                                  'CEP: ${locationController.postcode}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
+
                 const SizedBox(height: 80),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

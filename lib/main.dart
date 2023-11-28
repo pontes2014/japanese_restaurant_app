@@ -6,7 +6,7 @@ import 'package:japanese_restaurant_app/views/cart_page.dart';
 import 'package:japanese_restaurant_app/views/intro_page.dart';
 import 'package:japanese_restaurant_app/views/menu_page.dart';
 import 'package:japanese_restaurant_app/views/delivery_page.dart';
-import 'package:japanese_restaurant_app/views/paynow.dart';
+import 'package:japanese_restaurant_app/views/paynow_page.dart';
 
 import 'package:provider/provider.dart';
 

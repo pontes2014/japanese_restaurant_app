@@ -13,23 +13,25 @@ class ApiGeoLocation {
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
 
-        print('API Response: $data');
-
         if (data.containsKey('address')) {
           final Map<String, dynamic>? addressData =
               data['address'] as Map<String, dynamic>?;
 
           if (addressData != null) {
             final String road = addressData['road'] ?? "Rua não disponível";
-            final String cityDistrict =
+            String cityDistrict =
                 addressData['city_district'] ?? "Bairro/Cidade não disponível";
+
+            if (cityDistrict == "Bairro/Cidade não disponível") {
+              cityDistrict = addressData['town'] ?? "Cidade não disponível";
+            }
+
+            if (cityDistrict == "Cidade não disponível") {
+              cityDistrict = addressData['city'] ?? "Cidade não disponível";
+            }
+
             final String postcode =
                 addressData['postcode'] ?? "CEP não disponível";
-
-            print('Localização: ${data['display_name']}');
-            print('Rua: $road');
-            print('Bairro/Cidade: $cityDistrict');
-            print('CEP: $postcode');
 
             return {
               'road': road,
@@ -47,7 +49,6 @@ class ApiGeoLocation {
             'Falha ao carregar dados da localização. Código de status: ${response.statusCode}');
       }
     } catch (error) {
-      print('Erro na chamada de API: $error');
       throw error;
     }
   }

@@ -20,6 +20,8 @@ class _MenuPageState extends State<MenuPage> {
   late List<Food> foodMenu = [];
   late List<Food> drinksMenu = [];
   late List<Food> dessertMenu = [];
+  late String searchQuery = '';
+
 
   @override
   void initState() {

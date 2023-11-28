@@ -1,4 +1,4 @@
-#Sun Nov 26 16:37:45 BRT 2023
+#Mon Nov 27 16:52:25 BRT 2023
 base.0=C\:\\Projetos\\japanese_restaurant_app\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
